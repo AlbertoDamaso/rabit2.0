@@ -7,7 +7,6 @@ import { Home } from '../screens/Home';
 import { Order } from '../screens/Order';
 import { Profile } from '../screens/Profile';
 import { StartOrder } from '../screens/StartOrder';
-import { Opine } from '../screens/Opine';
 import { CustomDrawer } from '../components/CustomDrawer';
 import { theme } from '../global/styles/theme';
 
@@ -47,8 +46,8 @@ export function AppRoutes() {
         component={Home}
         options={{
           drawerIcon: ({color}) => (
-            <MaterialIcons
-              name="add-shopping-cart"
+            <Feather
+              name="file-text"
               color={color}
               size={24}
             />
@@ -56,12 +55,12 @@ export function AppRoutes() {
         }}
       />   
       <AppDrawer.Screen 
-        name="+ Beer" 
+        name="Beer" 
         component={Order}
         options={{
           drawerIcon: ({color}) => (
-            <MaterialIcons
-              name="shopping-cart"
+            <Feather
+              name="file-plus"
               color={color}
               size={24}
             />
@@ -69,7 +68,7 @@ export function AppRoutes() {
         }}
       />
       <AppDrawer.Screen 
-        name="Perfil" 
+        name="Profile" 
         component={Profile}
         options={{
           drawerIcon: ({color}) => (

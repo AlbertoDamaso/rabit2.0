@@ -1,53 +1,35 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React from 'react';
 import {
   View,
   Text,
+  Image
 } from 'react-native';
-import firebase from '../../services/firebaseConnection';
+
+import addPhoto from '../../assets/AddPhoto.png';
 
 import { Background } from '../../components/Background';
-import { BtnDrawer } from '../../components/BtnDrawer';
-import { ListReserv } from '../../components/ListReserv';
-
+import { BtnGoBack } from '../../components/BtnGoBack';
 import { styles } from './styles';
-import { AuthContext } from '../../contexts/auth';
 
 export function Order() {
-  // const [reservado, setReservado] = useState([]);
 
-  // const { user } = useContext(AuthContext);
-  // const uid = user && user.uid;
-
-  // useEffect(()=>{
-  //   async function loadList(){
-
-  //     await firebase.database().ref('reserva')
-  //     .child(uid)
-  //     .limitToLast(10)
-  //     .on('value', (snapshot)=>{
-  //       setReservado([]);
-
-  //       snapshot.forEach((childItem) => {
-  //         let list = {
-  //           keyBeer: childItem.val().keyBeer,
-  //           image: childItem.val().image,
-  //           title: childItem.val().title,
-  //           quant: childItem.val().quant,
-  //         };
-          
-  //         setReservado(oldArray => [...oldArray, list].reverse());
-  //       })
-  //     })
-
-  //   }
-
-  //   loadList();
-  // }, []);
 
   return (
     <Background>
         <View style={styles.container}>
+          <View style={styles.lineHeader}>
+            <BtnGoBack/>
 
+            <Text style={styles.title}>
+              Cadastrar
+            </Text>
+
+          </View>
+            <View style={styles.formatImg}>
+              <Image
+                source={addPhoto}
+              />
+            </View>
         </View>
     </Background>  
   );

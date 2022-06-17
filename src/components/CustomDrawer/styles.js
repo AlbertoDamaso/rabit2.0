@@ -12,7 +12,8 @@ export const styles = StyleSheet.create({
     color: theme.colors.light,
     fontFamily: theme.fonts.title,
     fontSize: 18,
-    marginTop: 15
+    marginTop: 15,
+    marginBottom: 20,
   },
   text: {
     color: theme.colors.primaryMais,
@@ -22,8 +23,8 @@ export const styles = StyleSheet.create({
     marginBottom: 25,
   },
   lineDivider: {
-      borderBottomWidth: 2,
-      borderColor: theme.colors.secundary,
-      marginBottom: 25,
+    borderBottomWidth: 2,
+    borderColor: theme.colors.secundary,
+    marginBottom: 25,
   }
 });

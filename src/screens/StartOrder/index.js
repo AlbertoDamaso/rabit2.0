@@ -20,34 +20,6 @@ import { theme } from '../../global/styles/theme';
 import { styles } from './styles';
 
 export function StartOrder(data) {
-  const navigation = useNavigation();
-  const { resv } = useContext(AppContext);
-  const [count, setCount] = useState(1);
-  const [obs, setObs] = useState('');
-
-  //Contadores
-  function minus(){
-      if(count > 0){
-          setCount(count-1)
-      }
-  }
-  function plus(){
-      setCount(count+1)
-  }
-
-
-  function handledOrder(){
-    let keyBeer = data.route.params.key;
-    let title = data.route.params.title;
-    let image = data.route.params.image;
-    
-    resv(count, obs, title, image,keyBeer);
-
-    setCount(1);
-    setObs('');
-    navigation.navigate('Reservados');
-  }
-
 
   return (
     <Background>      
@@ -59,9 +31,9 @@ export function StartOrder(data) {
 
             <BtnGoBack/>
 
-            <View style={styles.areaShare}>
+            {/* <View style={styles.areaShare}>
               <BtnShare/>
-            </View>
+            </View> */}
 
             <View style={styles.areaLike}>
               <BtnLike/>
@@ -74,7 +46,7 @@ export function StartOrder(data) {
             {data.route.params.title}
           </Text>
 
-          <Text style={[styles.bodyInfo, {height: 25, fontFamily: theme.fonts.title, marginHorizontal:20}]}>
+          <Text style={[styles.bodyInfo, {height: 25, fontFamily: theme.fonts.title, marginTop: 20,marginBottom: 1, marginHorizontal:20}]}>
             Contém:
           </Text>
           <Text style={styles.bodyInfo}>
@@ -82,41 +54,10 @@ export function StartOrder(data) {
           </Text>
          
         </View>
+        <Text style={styles.textValor}> 
+          {data.route.params.valor}
+        </Text>
 
-        <View style={styles.areaServ}>
-          <View style={styles.serve}>
-            <Feather
-              name={'user'}
-              size={20}
-              color={theme.colors.primary}
-            />
-            <Text style={styles.textServ}> 
-              Serve 1 Pessoa 
-            </Text> 
-          </View>
-          <Text style={styles.textValor}> 
-            {data.route.params.valor}
-          </Text>
-        </View>
-
-        <View style={styles.areaBtn}>
-          <BtnCount 
-            minus={minus}
-            plus={plus}
-            count={count}
-          />
-
-          <Button
-            onPress={handledOrder}
-            title={"Reservar"}
-            activeOpacity={0.7}
-          />
-        </View>
-
-        <AreaObs
-          value={obs}
-          onChangeText={ (text) => setObs(text) }
-        />
     </Background>        
   );
 }

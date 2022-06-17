@@ -24,6 +24,7 @@ export const styles = StyleSheet.create({
     borderRadius: 45,
   },
   title: {
+    width: '65%',
     fontSize: 19,
     fontFamily: theme.fonts.title,
     color: theme.colors.light,

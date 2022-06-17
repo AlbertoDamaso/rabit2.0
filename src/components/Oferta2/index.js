@@ -21,6 +21,7 @@ export function Oferta2({ data }){
   return (
     <TWF
       onPress={(handleStartOrder)}
+      disabled={true}
     // onLongPress={ () => deleteItem(data)}
     >
         <View style={styles.container}>
@@ -31,16 +32,7 @@ export function Oferta2({ data }){
                 <Text style={styles.text}>
                   {data.desc}
                 </Text>
-                <View style={styles.serve}>
-                  <Feather
-                    name={'user'}
-                    size={20}
-                    color={theme.colors.primary}
-                  />
-                  <Text style={styles.textServ}> 
-                    Serve 1 Pessoa 
-                  </Text> 
-                </View>
+
                 <Text style={styles.textValor}> 
                   {data.valor} 
                 </Text>

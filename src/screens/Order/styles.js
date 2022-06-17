@@ -4,14 +4,20 @@ import { theme } from '../../global/styles/theme';
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
+    alignItems: 'center',
+  },
+  lineHeader: {
+    width: '100%',
+    flexDirection: 'row',
   },
   title: {
-    width: '40%',
-    height: 30,
-    marginTop: 130,
-    marginHorizontal: 20,
+    marginTop: 70,
+    marginHorizontal: 145,
     fontFamily: theme.fonts.title,
     color: theme.colors.light,
     fontSize: 19,
-  }
+  },
+  formatImg: {
+    marginTop: 60,
+  },
 });

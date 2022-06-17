@@ -31,18 +31,18 @@ export function Home() {
               style={styles.imgBgHeader}
             />
             <BtnDrawer/>
-            <View style={styles.areaShare}>
+            {/* <View style={styles.areaShare}>
               <BtnShare/>
-            </View>
+            </View> */}
           </View>
 
           <View>
-            <AreaEmp title={"Rabit - beer Artesanais"}/>
+            <AreaEmp title={"Rabit - Evento Junino dia 25/06"}/>
           </View>
 
           <View>
             <Text style={styles.title}>
-              Ofertas
+              Ativas no estoque
             </Text>
 
             <ListOfertas
@@ -50,6 +50,10 @@ export function Home() {
               horizontal={true}
               showsHorizontalScrollIndicator={false}
             />
+
+            <Text style={styles.title}>
+              Fora de estoque
+            </Text>
             <ListOfertas2
               data={beer}
               showsVerticalScrollIndicator={false}

@@ -22,9 +22,6 @@ export function CustomDrawer(props) {
             <Text style={styles.title}>
                {user && user.name}
             </Text>
-            <Text style={styles.text}>
-               6 reservas
-            </Text>
         </View>
 
         <View style={styles.lineDivider} />
@@ -34,7 +31,7 @@ export function CustomDrawer(props) {
         <View style={styles.lineDivider} />
         <DrawerItem
             {...props}
-            label="Sair"
+            label="Logout"
             style={{marginHorizontal: 20, marginTop: -15}}
             labelStyle={{fontSize: 19, fontWeight: 'bold', color:"#f1f1f1", marginLeft: -25}}
             icon={() =>

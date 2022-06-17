@@ -43,7 +43,7 @@ export function AppRoutes() {
       }}
     >
       <AppDrawer.Screen 
-        name="Reservar" 
+        name="Home" 
         component={Home}
         options={{
           drawerIcon: ({color}) => (
@@ -56,7 +56,7 @@ export function AppRoutes() {
         }}
       />   
       <AppDrawer.Screen 
-        name="Reservados" 
+        name="+ Beer" 
         component={Order}
         options={{
           drawerIcon: ({color}) => (
@@ -87,14 +87,7 @@ export function AppRoutes() {
         options={{
           drawerLabel: () => null
         }}
-      />         
-      <AppDrawer.Screen 
-        name="Opinar"
-        component={Opine}  
-        options={{
-          drawerLabel: () => null
-        }}
-      />      
+      />             
                         
     </AppDrawer.Navigator>
     );

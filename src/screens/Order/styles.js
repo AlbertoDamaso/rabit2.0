@@ -20,4 +20,8 @@ export const styles = StyleSheet.create({
   formatImg: {
     marginTop: 60,
   },
+  areaInclu: {
+    width: '100%',
+    marginTop: 62,
+  }
 });

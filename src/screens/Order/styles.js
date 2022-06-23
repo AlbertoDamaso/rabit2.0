@@ -23,5 +23,28 @@ export const styles = StyleSheet.create({
   areaInclu: {
     width: '100%',
     marginTop: 62,
+  },
+  arealine: {
+    width: '80%',
+    height: 50,
+    alignSelf: 'center',
+    justifyContent: 'flex-start',
+    flexDirection: 'row',
+    marginBottom: 30,
+  },
+  inputValor: {
+    width: '48%',
+    height: 45,
+    alignSelf:'flex-start',
+    paddingHorizontal: 15,
+    color: theme.colors.light,
+    backgroundColor: theme.colors.secundaryMenos,
+    borderWidth: 1,
+    borderColor: theme.colors.secundaryMenos,
+    borderRadius: 5,
+    fontFamily: theme.fonts.text,
+    fontSize: 19,
+    marginBottom: 20,    
+    marginRight: 10,
   }
 });

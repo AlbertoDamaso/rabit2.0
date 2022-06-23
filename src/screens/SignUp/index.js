@@ -3,10 +3,11 @@ import {
   View,
   Text,
   Keyboard,
+  Image,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-import { Logo } from '../../components/Logo';
+import addPhotoProfile from '../../assets/AddPhotoProfile.png';
 import { Input } from '../../components/Input';
 import { MaskInput } from '../../components/MaskInput';
 import { Button } from '../../components/Button';
@@ -35,7 +36,9 @@ export function SignUp() {
 
   return (
     <View style={styles.container}>
-      <Logo style={styles.logo}/>
+      <Image
+        source={addPhotoProfile}
+      />
 
       <View style={styles.areaInput}>
         <Input

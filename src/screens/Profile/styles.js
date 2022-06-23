@@ -32,9 +32,6 @@ export const styles = StyleSheet.create({
     fontSize: 18,
     marginTop: 21,
   },
-  areBtn: {
-    marginTop: 47,
-  },
   formatBtn: {
     marginTop: 18,
   },

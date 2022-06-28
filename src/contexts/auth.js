@@ -48,7 +48,7 @@ function AuthProvider({ children }){
     }
 
     //Cadastrar usuario
-    async function signUp(email, password, name, zap){
+    async function signUp(email, password, name, zap, image){
         setLoadingAuth(true);
         await firebase.auth().createUserWithEmailAndPassword(email, password)
         .then(async (value) =>{
@@ -56,6 +56,7 @@ function AuthProvider({ children }){
             await firebase.database().ref('users').child(uid).set({                
                 name: name,
                 zap: zap,
+                image: image,
             })
             .then(()=>{
                 let data = {
@@ -63,6 +64,7 @@ function AuthProvider({ children }){
                     name: name,
                     email: value.user.email,
                     zap: zap,
+                    image: image,
                 };
                 setUser(data);
                 storageUser(data);

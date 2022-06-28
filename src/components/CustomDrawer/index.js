@@ -17,7 +17,9 @@ export function CustomDrawer(props) {
   return (
     <DrawerContentScrollView {...props}>
         <View style={styles.container}>
-            <ImgProfile/>
+            <ImgProfile
+              source={{uri:user && user.image}}
+            />
 
             <Text style={styles.title}>
                {user && user.name}

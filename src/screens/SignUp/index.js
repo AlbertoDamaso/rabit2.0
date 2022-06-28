@@ -33,7 +33,7 @@ export function SignUp({route}) {
   }
 
   function handleSignUp(){
-    signUp(email, password, name, zap);
+    signUp(email, password, name, zap, image);
   }
 
   function handleSignIn(){

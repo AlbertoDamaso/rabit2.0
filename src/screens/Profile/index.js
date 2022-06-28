@@ -29,6 +29,7 @@ export function Profile() {
 
         <View style={styles.areaProfile}>
           <ImgProfile
+            source={{uri:user && user.image}}
             style={styles.imageProfile}
           /> 
           <Text style={styles.nameProfile}>

@@ -4,6 +4,7 @@ import {
   Text,
   Keyboard,
   Image,
+  TouchableOpacity as TO,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
@@ -16,15 +17,20 @@ import { styles } from '../SignIn/styles';
 import { AuthContext } from '../../contexts/auth'; 
 
 
-export function SignUp() {
+export function SignUp({route}) {
   const navigation = useNavigation();
 
   const [zap, setZap] = useState('');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  
+  const image = route.params?.picture;
+
   const { signUp } = useContext(AuthContext);
+  
+  function handleCamera(){
+    navigation.navigate('AddCamSignUp');
+  }
 
   function handleSignUp(){
     signUp(email, password, name, zap);
@@ -36,10 +42,27 @@ export function SignUp() {
 
   return (
     <View style={styles.container}>
-      <Image
-        source={addPhotoProfile}
-      />
-
+      <View style={styles.formatImg}>
+        <TO
+          style={styles.imgBtn}
+          onPress={handleCamera}
+        >
+          { 
+            image != null && image != ''
+          ?   
+            <Image
+              source={{uri:image}}
+              style={styles.comImage}
+              resizeMode="cover"
+            />
+          :                          
+            <Image
+              source={addPhotoProfile}
+            />
+          }
+        </TO>            
+      </View>      
+      
       <View style={styles.areaInput}>
         <Input
           placeholder="Nome"

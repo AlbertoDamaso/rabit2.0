@@ -22,4 +22,9 @@ export const styles = StyleSheet.create({
     color: theme.colors.light,
     fontFamily: theme.fonts.text,
   },
+  comImage:{
+    width: 109,
+    height: 109,
+    borderRadius: 90,
+  },  
 });

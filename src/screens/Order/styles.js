@@ -46,5 +46,12 @@ export const styles = StyleSheet.create({
     fontSize: 19,
     marginBottom: 20,    
     marginRight: 10,
-  }
+  },
+  comImage:{
+    width: 122,
+    height: 169,
+    borderWidth: 2,
+    borderRadius: 8,
+    borderColor: theme.colors.primary,
+  },
 });

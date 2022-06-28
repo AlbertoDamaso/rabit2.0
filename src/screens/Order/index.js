@@ -4,8 +4,10 @@ import {
   Text,
   Image,
   Keyboard,
-  TextInput
+  TextInput,
+  TouchableOpacity as TO,
 } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 import addPhoto from '../../assets/AddPhoto.png';
 
@@ -17,8 +19,13 @@ import { AreaSwitch } from '../../components/AreaSwitch';
 import { Button } from '../../components/Button';
 import { styles } from './styles';
 
-export function Order() {
+export function Order({route}) {
+  const navigation = useNavigation();
+  const image = route.params?.picture;
 
+  function handleCamera(){
+    navigation.navigate('AddCam');
+  }
 
   return (
     <Background>
@@ -29,13 +36,27 @@ export function Order() {
             <Text style={styles.title}>
               Cadastrar
             </Text>
-
           </View>
 
           <View style={styles.formatImg}>
-            <Image
-              source={addPhoto}
-            />
+            <TO
+              style={styles.imgBtn}
+              onPress={handleCamera}
+            >
+              { 
+                image != null && image != ''
+              ?   
+                <Image
+                  source={{uri:image}}
+                  style={styles.comImage}
+                  resizeMode="stretch"
+                />
+              :                          
+                <Image
+                  source={addPhoto}
+                />
+              }
+            </TO>            
           </View>
 
           <View style={styles.areaInclu}>

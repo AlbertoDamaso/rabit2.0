@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { SignIn } from '../screens/SignIn';
 import { SignUp } from '../screens/SignUp';
+import { AddCamSignUp } from '../screens/AddCamSignUp';
 
 const AuthStack = createNativeStackNavigator();
 
@@ -21,7 +22,12 @@ export function AuthRoutes(){
       <AuthStack.Screen 
         name="SignUp"
         component={SignUp}   
-      />           
+      />  
+      <AuthStack.Screen 
+        name="AddCamSignUp"
+        component={AddCamSignUp}   
+      />  
+               
     </AuthStack.Navigator>
   );
 }

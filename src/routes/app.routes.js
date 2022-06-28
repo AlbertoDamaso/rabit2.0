@@ -5,6 +5,7 @@ import { Feather, MaterialIcons } from '@expo/vector-icons';
 
 import { Home } from '../screens/Home';
 import { Order } from '../screens/Order';
+import { AddCam } from '../screens/AddCam';
 import { Profile } from '../screens/Profile';
 import { StartOrder } from '../screens/StartOrder';
 import { CustomDrawer } from '../components/CustomDrawer';
@@ -86,7 +87,14 @@ export function AppRoutes() {
         options={{
           drawerLabel: () => null
         }}
-      />             
+      /> 
+      <AppDrawer.Screen
+          name="AddCam"
+          component={AddCam}
+          options={{
+            drawerLabel: () => null
+          }}
+      />                
                         
     </AppDrawer.Navigator>
     );

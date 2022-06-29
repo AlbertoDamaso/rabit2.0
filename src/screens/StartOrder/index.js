@@ -50,7 +50,7 @@ export function StartOrder(data) {
             Contém:
           </Text>
           <Text style={styles.bodyInfo}>
-            {data.route.params.descplus}
+            {data.route.params.desc}
           </Text>
          
         </View>

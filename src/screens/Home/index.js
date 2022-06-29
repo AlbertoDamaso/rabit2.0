@@ -18,7 +18,7 @@ import { styles } from './styles';
 
 export function Home() {
 
-  const { beer } = useContext(AppContext);
+  const { stockA, stockI } = useContext(AppContext);
   
   return (
     <Background>      
@@ -44,19 +44,19 @@ export function Home() {
               Ativas no estoque
             </Text>
 
-            {/* <ListOfertas
-              data={beer}
+            <ListOfertas
+              data={stockA}
               horizontal={true}
               showsHorizontalScrollIndicator={false}
-            /> */}
+            />  
 
             <Text style={styles.title}>
               Fora de estoque
             </Text>
-            {/* <ListOfertas2
-              data={beer}
+            <ListOfertas2
+              data={stockI}
               showsVerticalScrollIndicator={false}
-            />           */}
+            />           
           </View>
 
         </ScrollView>

@@ -5,9 +5,26 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 export const AuthContext = createContext({})
 
 function AuthProvider({ children }){
+    const [adm, setAdm] = useState(false);
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const [loadingAuth, setLoadingAuth] = useState(false);
+
+    //Funcao para validar adm
+    useEffect(()=>{
+        async function searchAdm(){
+            await firebase.database().ref('users')
+            .on('value', (snapshot) =>{
+                
+                snapshot.forEach((children)=>{
+                    if(children.val().email == "alberto.matheus21@gmail.com"){
+                        setAdm(true);
+                    }
+                })
+            })
+        }
+        searchAdm();
+    }, []);
 
     //Funcao para percistencia
     useEffect(() =>{
@@ -57,6 +74,7 @@ function AuthProvider({ children }){
                 name: name,
                 zap: zap,
                 image: image,
+                email: email,
             })
             .then(()=>{
                 let data = {
@@ -103,7 +121,7 @@ function AuthProvider({ children }){
     }
 
     return(
-        <AuthContext.Provider value={{ signed: !!user, user, loading, loadingAuth, signUp, signIn, signOut }}>
+        <AuthContext.Provider value={{ signed: !!user, user, loading, loadingAuth, adm, signUp, signIn, signOut }}>
             {children}
         </AuthContext.Provider>
     );

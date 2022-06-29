@@ -11,7 +11,6 @@ import imgBgHeader from '../../assets/bg.png';
 import { AreaEmp } from '../../components/AreaEmp';
 import { Background } from '../../components/Background';
 import { BtnDrawer } from '../../components/BtnDrawer';
-import { BtnShare } from '../../components/BtnShare';
 import { ListOfertas } from '../../components/ListOfertas';
 import { ListOfertas2 } from '../../components/ListOfertas2';
 import { AppContext } from '../../contexts/app';
@@ -45,19 +44,19 @@ export function Home() {
               Ativas no estoque
             </Text>
 
-            <ListOfertas
+            {/* <ListOfertas
               data={beer}
               horizontal={true}
               showsHorizontalScrollIndicator={false}
-            />
+            /> */}
 
             <Text style={styles.title}>
               Fora de estoque
             </Text>
-            <ListOfertas2
+            {/* <ListOfertas2
               data={beer}
               showsVerticalScrollIndicator={false}
-            />          
+            />           */}
           </View>
 
         </ScrollView>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
 import {
   View,
   Text,
@@ -10,6 +10,7 @@ import {
 import { useNavigation } from '@react-navigation/native';
 
 import addPhoto from '../../assets/AddPhoto.png';
+import { AppContext } from '../../contexts/app';
 
 import { Background } from '../../components/Background';
 import { BtnGoBack } from '../../components/BtnGoBack';
@@ -18,10 +19,24 @@ import { DescCerv } from '../../components/DescCerv';
 import { AreaSwitch } from '../../components/AreaSwitch';
 import { Button } from '../../components/Button';
 import { styles } from './styles';
+import { theme } from '../../global/styles/theme';
 
 export function Order({route}) {
   const navigation = useNavigation();
+  const [title, setTitle] = useState('');
+  const [desc, setDesc] = useState('');
+  const [valor, setValor] = useState('');
+
+  const [isAtiva, setIsAtiva] = useState(true);
+  const toggleSwitch = () => setIsAtiva(previousState => !previousState);
+
   const image = route.params?.picture;
+  const { beer } = useContext(AppContext);
+
+  function handleInclu() {
+    beer(image, title, desc, valor, isAtiva); 
+    navigation.navigate('Home');
+  }
 
   function handleCamera(){
     navigation.navigate('AddCam');
@@ -66,12 +81,14 @@ export function Order({route}) {
               onSubmitEditing={ () => Keyboard.dismiss()}
               autoCorrect={false}
               autoCapitalize="none"
-              // value={email}
-              // onChangeText={ (text) => setEmail(text) }
+              value={title}
+              onChangeText={ (text) => setTitle(text) }
             />
 
             <DescCerv
               placeholder={"Descrição da Cerveja"}
+              value={desc}
+              onChangeText={ (text) => setDesc(text) }
             />
 
             <View style={styles.arealine}>
@@ -83,15 +100,20 @@ export function Order({route}) {
                 autoCapitalize="none"
                 placeholderTextColor="#CCDE3F"
                 placeholder="Valor"
-                // value={email}
-                // onChangeText={ (text) => setEmail(text) }              
+                keyboardType='numeric'
+                value={valor}
+                onChangeText={ (text) => setValor(text) }              
               />
 
-              <AreaSwitch/>
+              <AreaSwitch
+                onValueChange={toggleSwitch}
+                thumbColor={isAtiva ? theme.colors.light : theme.colors.secundary}
+                value={isAtiva}
+              />
             </View>
 
             <Button
-              // onPress={(handleInclu)}
+              onPress={(handleInclu)}
               title={"Cadastrar Cerveja"}
               activeOpacity={0.7}
             />

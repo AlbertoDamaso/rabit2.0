@@ -23,13 +23,13 @@ function AppProvider({ children }){
     const { user } = useContext(AuthContext);    
     
     //Tabela de Cervejas Fixas
-    async function addBeer(image, title, desc, valor, isAtiva) {
-      
-      await(await firebase.database().ref('beer').set({
+    async function beer(image, title, desc, valor, isAtiva) {
+      let key = firebase.database().ref('beer').push().key;
+      await(await firebase.database().ref('beer').child(key).set({
         image:image,
         title:title,
         desc:desc,
-        valor:valor,
+        valor:parseFloat(valor),
         ativa:isAtiva,
       }));
     }
@@ -37,7 +37,7 @@ function AppProvider({ children }){
 
 
     return(
-      <AppContext.Provider value={{ addBeer }}>
+      <AppContext.Provider value={{ beer }}>
         {children}
       </AppContext.Provider>
     );

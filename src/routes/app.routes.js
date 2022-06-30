@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { Feather, MaterialIcons } from '@expo/vector-icons';
+import { AuthContext } from '../contexts/auth';
+import { theme } from '../global/styles/theme';
 
 import { Home } from '../screens/Home';
 import { Order } from '../screens/Order';
@@ -9,11 +11,11 @@ import { AddCam } from '../screens/AddCam';
 import { Profile } from '../screens/Profile';
 import { StartOrder } from '../screens/StartOrder';
 import { CustomDrawer } from '../components/CustomDrawer';
-import { theme } from '../global/styles/theme';
 
 const AppDrawer = createDrawerNavigator();
 
 export function AppRoutes() {
+  const { adm } = useContext(AuthContext);
   return(
     <AppDrawer.Navigator
       drawerContent={ (props) => <CustomDrawer {...props} /> }
@@ -55,6 +57,30 @@ export function AppRoutes() {
           ),
         }}
       />   
+      {/* {
+        adm == true ?
+        <AppDrawer.Screen 
+          name="Beer" 
+          component={Order}
+          options={{
+            drawerIcon: ({color}) => (
+              <Feather
+                name="file-plus"
+                color={color}
+                size={24}
+              />
+            ),
+          }}
+        />
+        :
+        <AppDrawer.Screen
+          name="Beer"
+          component={Order}
+          options={{
+            drawerLabel: () => null
+          }}
+        />  
+      } */}
       <AppDrawer.Screen 
         name="Beer" 
         component={Order}
@@ -67,7 +93,7 @@ export function AppRoutes() {
             />
           ),
         }}
-      />
+      />      
       <AppDrawer.Screen 
         name="Profile" 
         component={Profile}

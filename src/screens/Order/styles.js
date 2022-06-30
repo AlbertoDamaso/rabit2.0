@@ -50,8 +50,6 @@ export const styles = StyleSheet.create({
   comImage:{
     width: 122,
     height: 169,
-    borderWidth: 2,
     borderRadius: 8,
-    borderColor: theme.colors.primary,
   },
 });

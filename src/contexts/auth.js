@@ -10,21 +10,19 @@ function AuthProvider({ children }){
     const [loading, setLoading] = useState(true);
     const [loadingAuth, setLoadingAuth] = useState(false);
 
-    //Funcao para validar adm
-    useEffect(()=>{
-        async function searchAdm(){
-            await firebase.database().ref('users')
-            .on('value', (snapshot) =>{
-                
-                snapshot.forEach((children)=>{
-                    if(children.val().email == "alberto.matheus21@gmail.com"){
-                        setAdm(true);
-                    }
-                })
-            })
-        }
-        searchAdm();
-    }, []);
+    //Funcao para validar adm//Adicionar email tia//Arrumar aqui
+    // useEffect(()=>{
+    //     async function searchAdm(){
+    //         let email = user.email;
+    //         if(email == "alberto.matheus21@gmail.com"){
+    //             setAdm(true);
+    //         }
+    //         else{
+    //             setAdm(false);
+    //         }
+    //     }
+    //     searchAdm();
+    // }, []);
 
     //Funcao para percistencia
     useEffect(() =>{

@@ -20,6 +20,9 @@ export const styles = StyleSheet.create({
   image: {
     width: '100%',
     height: 150,
+    borderTopLeftRadius: 8,
+    borderTopRightRadius: 8,
+    resizeMode: 'cover',
   },
   areaTxt: {
     marginVertical: 20

@@ -5,7 +5,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 export const AuthContext = createContext({})
 
 function AuthProvider({ children }){
-    const [adm, setAdm] = useState(false);
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const [loadingAuth, setLoadingAuth] = useState(false);
@@ -50,6 +49,9 @@ function AuthProvider({ children }){
                     uid: uid,
                     name: snapshot.val().name,
                     email: value.user.email,
+                    image: snapshot.val().image,
+                    useType: snapshot.val().useType,
+                    zap: snapshot.val().zap,
                 };
                 setUser(data);
                 storageUser(data);
@@ -67,25 +69,50 @@ function AuthProvider({ children }){
         setLoadingAuth(true);
         await firebase.auth().createUserWithEmailAndPassword(email, password)
         .then(async (value) =>{
+
             let uid = value.user.uid;
-            await firebase.database().ref('users').child(uid).set({                
-                name: name,
-                zap: zap,
-                image: image,
-                email: email,
-            })
-            .then(()=>{
-                let data = {
-                    uid: uid,
+
+            if(email == "alberto.matheus@hotmail.com"){
+                await firebase.database().ref('users').child(uid).set({                
                     name: name,
-                    email: value.user.email,
                     zap: zap,
                     image: image,
-                };
-                setUser(data);
-                storageUser(data);
-                setLoadingAuth(false);
-            })
+                    useType: "Administrador",
+                })
+                .then(()=>{
+                    let data = {
+                        uid: uid,
+                        name: name,
+                        email: value.user.email,
+                        zap: zap,
+                        image: image,
+                        useType: "Administrador",
+                    };
+                    setUser(data);
+                    storageUser(data);
+                    setLoadingAuth(false);
+                })
+            }else{
+                await firebase.database().ref('users').child(uid).set({                
+                    name: name,
+                    zap: zap,
+                    image: image,
+                    useType: "Normal",
+                })
+                .then(()=>{
+                    let data = {
+                        uid: uid,
+                        name: name,
+                        email: value.user.email,
+                        zap: zap,
+                        image: image,
+                        useType: "Normal",
+                    };
+                    setUser(data);
+                    storageUser(data);
+                    setLoadingAuth(false);
+                })
+            }    
         })
         .catch( (error) => {
             if(error.code === 'auth/weak-password'){
@@ -119,7 +146,7 @@ function AuthProvider({ children }){
     }
 
     return(
-        <AuthContext.Provider value={{ signed: !!user, user, loading, loadingAuth, adm, signUp, signIn, signOut }}>
+        <AuthContext.Provider value={{ signed: !!user, user, loading, loadingAuth, signUp, signIn, signOut }}>
             {children}
         </AuthContext.Provider>
     );

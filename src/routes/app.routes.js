@@ -15,7 +15,7 @@ import { CustomDrawer } from '../components/CustomDrawer';
 const AppDrawer = createDrawerNavigator();
 
 export function AppRoutes() {
-  const { adm } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   return(
     <AppDrawer.Navigator
       drawerContent={ (props) => <CustomDrawer {...props} /> }
@@ -57,8 +57,8 @@ export function AppRoutes() {
           ),
         }}
       />   
-      {/* {
-        adm == true ?
+      {
+      user && user.useType == "Administrador" ?
         <AppDrawer.Screen 
           name="Beer" 
           component={Order}
@@ -72,28 +72,19 @@ export function AppRoutes() {
             ),
           }}
         />
-        :
+      :
         <AppDrawer.Screen
           name="Beer"
           component={Order}
           options={{
-            drawerLabel: () => null
+            drawerLabel: () => null,
+            drawerItemStyle: {
+              height: 0,
+            }
           }}
         />  
-      } */}
-      <AppDrawer.Screen 
-        name="Beer" 
-        component={Order}
-        options={{
-          drawerIcon: ({color}) => (
-            <Feather
-              name="file-plus"
-              color={color}
-              size={24}
-            />
-          ),
-        }}
-      />      
+      } 
+ 
       <AppDrawer.Screen 
         name="Profile" 
         component={Profile}

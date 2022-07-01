@@ -3,7 +3,7 @@ import {
   View,
   Text,
   Image,
-  SafeAreaView
+  SafeAreaView,
 } from 'react-native';
 import { ScrollView } from 'react-native-virtualized-view';
 
@@ -19,7 +19,7 @@ import { styles } from './styles';
 export function Home() {
 
   const { stockA, stockI } = useContext(AppContext);
-  
+
   return (
     <Background>      
       <SafeAreaView style={styles.container}>

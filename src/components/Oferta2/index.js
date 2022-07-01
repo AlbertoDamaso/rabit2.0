@@ -5,13 +5,12 @@ import {
   Image,
   TouchableWithoutFeedback as TWF
 } from 'react-native';
+
 import { useNavigation } from '@react-navigation/native';
-import { Feather } from '@expo/vector-icons';
 
 import { styles } from './styles';
-import { theme } from '../../global/styles/theme';
 
-export function Oferta2({ data }){
+export function Oferta2({ data, deleteItem }){
   const navigation = useNavigation();
 
   function handleStartOrder(){
@@ -21,8 +20,8 @@ export function Oferta2({ data }){
   return (
     <TWF
       onPress={(handleStartOrder)}
-      disabled={true}
-    // onLongPress={ () => deleteItem(data)}
+      //disabled={true}
+      onLongPress={ () => deleteItem(data)}
     >
         <View style={styles.container}>
             <View style={styles.areaTxt}>

@@ -9,7 +9,7 @@ import { useNavigation } from '@react-navigation/native';
 
 import { styles } from './styles';
 
-export function Oferta({ data }){
+export function Oferta({ data, deleteItem }){
   const navigation = useNavigation();
 
   function handleStartOrder(){
@@ -19,7 +19,7 @@ export function Oferta({ data }){
   return (
     <TWF
       onPress={(handleStartOrder)}
-    // onLongPress={ () => deleteItem(data)}
+      onLongPress={ () => deleteItem(data)}
     >
       <View style={styles.container}>
         <View style={styles.areaImg}>

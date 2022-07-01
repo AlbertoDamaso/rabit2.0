@@ -1,6 +1,5 @@
 import React, { useState, createContext, useContext, useEffect } from 'react';
 import firebase from '../services/firebaseConnection';
-import { AuthContext } from './auth';
 
 export const AppContext = createContext({})
 
@@ -9,7 +8,7 @@ function AppProvider({ children }){
     const [stockA, setStockA] = useState([]);
     const [stockI, setStockI] = useState([]);
     
-    //Cria beer
+    //Cria beer//Arrumar para pós cadastro zerar campos
     async function beer(image, title, desc, valor, isAtiva) {
       let key = firebase.database().ref('beer').push().key;
       await(await firebase.database().ref('beer').child(key).set({

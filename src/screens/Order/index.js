@@ -30,7 +30,7 @@ export function Order({route}) {
   const [isAtiva, setIsAtiva] = useState(true);
   const toggleSwitch = () => setIsAtiva(previousState => !previousState);
 
-  const image = route.params?.picture;
+  const [image, setImage] = useState(route.params?.picture);
   const { beer } = useContext(AppContext);
 
   function handleInclu() {
@@ -40,6 +40,7 @@ export function Order({route}) {
     setDesc('');
     setValor('');
     setIsAtiva(true);
+    setImage('');
   }
 
   function handleCamera(){

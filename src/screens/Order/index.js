@@ -30,10 +30,15 @@ export function Order({route}) {
   const toggleSwitch = () => setIsAtiva(previousState => !previousState);
   const image = route.params?.picture;
   
-  const { beer } = useContext(AppContext);
+  const { addBeer } = useContext(AppContext);
 
   function handleInclu() {
-    beer(image, title, desc, valor, isAtiva); 
+    addBeer(image, title, desc, valor, isAtiva); 
+    Keyboard.dismiss();
+    setTitle('');
+    setDesc('');
+    setValor('');
+    setIsAtiva('');
     navigation.navigate('Home');
   }
 

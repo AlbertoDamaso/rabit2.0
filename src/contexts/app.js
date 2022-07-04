@@ -1,23 +1,32 @@
-import React, { useState, createContext, useContext, useEffect } from 'react';
+import React, { useState, createContext, useEffect } from 'react';
 import firebase from '../services/firebaseConnection';
 
 export const AppContext = createContext({})
 
 function AppProvider({ children }){
+  const [stockA, setStockA] = useState([]);
+  const [stockI, setStockI] = useState([]);
+  const [beer, setBeer] = useState(null);
 
-    const [stockA, setStockA] = useState([]);
-    const [stockI, setStockI] = useState([]);
-    
     //Cria beer//Arrumar para pós cadastro zerar campos
-    async function beer(image, title, desc, valor, isAtiva) {
+    async function addBeer(image, title, desc, valor, isAtiva) {
       let key = firebase.database().ref('beer').push().key;
-      await(await firebase.database().ref('beer').child(key).set({
+      await firebase.database().ref('beer').child(key).set({
         image:image,
         title:title,
         desc:desc,
         valor:parseFloat(valor),
         ativa:isAtiva,
-      }));
+      }).then(()=>{
+        let data = {
+          image:image,
+          title:title,
+          desc:desc,
+          valor:valor,
+          ativa:isAtiva,
+        };
+        setBeer(data);//para manipular dados da cerveja.
+      });
     }
 
     //Lista beer ativos
@@ -80,7 +89,7 @@ function AppProvider({ children }){
   } 
 
     return(
-      <AppContext.Provider value={{ beer, stockA, stockI, removBeer }}>
+      <AppContext.Provider value={{ beer, stockA, stockI, addBeer, removBeer }}>
         {children}
       </AppContext.Provider>
     );

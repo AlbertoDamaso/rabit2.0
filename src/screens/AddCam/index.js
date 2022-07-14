@@ -17,6 +17,12 @@ export function AddCam({navigation}) {
   const [open, setOpen] = useState(false);
   const [type, setType] = useState(Camera.Constants.Type.back);
 
+  function handleDispatch(){
+    navigation.navigate('Beer', {picture: capturedPhoto});
+    setCapturedPhoto(null);
+    setImage(null);
+  }
+
   useEffect(() => {
     (async () => {
       const { status } = await Camera.requestCameraPermissionsAsync();
@@ -146,7 +152,7 @@ export function AddCam({navigation}) {
 
               <TouchableOpacity 
                 style={styles.buttonModal}
-                onPress={ () => navigation.navigate('Beer', {picture: capturedPhoto}) }
+                onPress={(handleDispatch)}
               >
                 <FontAwesome name="send" size={50} color="#121212"/>
               </TouchableOpacity>              

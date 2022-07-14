@@ -58,7 +58,7 @@ function AuthProvider({ children }){
 
             let uid = value.user.uid;
 
-            if(email == "alberto.matheus@hotmail.com" || email =="jhol@test.com"){
+            if(email == "alberto.matheus@hotmail.com" || email =="centeninha@gmail.com"){
                 await firebase.database().ref('users').child(uid).set({                
                     name: name,
                     zap: zap,

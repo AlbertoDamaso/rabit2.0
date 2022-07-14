@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "rabit",
+    "name": "rabit2.0",
     "slug": "rabit",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -28,7 +28,7 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "description": "Projeto para controle de reservas das cervejarias atesanais.",
-    "githubUrl": "https://github.com/AlbertoDamaso/rabit.git"
+    "description": "Projeto para controle de reservas das cervejarias atesanais.Catalogo",
+    "githubUrl": "https://github.com/AlbertoDamaso/rabit2.0.git"
   }
 }

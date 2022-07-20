@@ -5,29 +5,33 @@ import {
 } from 'react-native';
 
 import { AppContext } from '../../contexts/app';
+import { AuthContext } from '../../contexts/auth';
 
 import { Oferta } from '../Oferta';
 import { styles } from './styles';
 
 export function ListOfertas({ data, ...rest }) {
   const { removBeer } = useContext(AppContext);
+  const { user } = useContext(AuthContext);
 
   //Funcao para confirmar o delete stockA
   function handleDelete(data){
-    Alert.alert(
-      'Cuidado Atenção!',
-      `Você deseja excluir ${data.title}`,
-      [
-        {
-          text:'Cancelar',
-          style: 'cancel'
-        },
-        {
-          text: 'Continuar',
-          onPress: () => handleDeleteSuccess(data)
-        }
-      ]
-    )
+    if (user.useType == "Administrador"){
+      Alert.alert(
+        'Cuidado Atenção!',
+        `Você deseja excluir ${data.title}`,
+        [
+          {
+            text:'Cancelar',
+            style: 'cancel'
+          },
+          {
+            text: 'Continuar',
+            onPress: () => handleDeleteSuccess(data)
+          }
+        ]
+      )
+    }
   }
 
   function handleDeleteSuccess(data){

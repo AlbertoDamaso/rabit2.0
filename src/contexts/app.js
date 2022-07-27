@@ -97,6 +97,7 @@ function AppProvider({ children }){
   async function resv(quant, obs, title, image, keyBeer) {
     const uid = user.uid;
     const bid = keyBeer;
+    console.log(bid);
     //Cria uma reserva nova 
     let key =  firebase.database().ref('reserva').child(uid).child(bid).push().key;
     firebase.database().ref('reserva').child(uid).child(bid).child(key).set({

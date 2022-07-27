@@ -11,25 +11,29 @@ import { ListReserv } from '../../components/ListReserv';
 
 import { styles } from './styles';
 import { AuthContext } from '../../contexts/auth';
+import { AppContext } from '../../contexts/app';
 
+//Arrumar o Order 
 export function Order() {
   const [reservado, setReservado] = useState([]);
 
   const { user } = useContext(AuthContext);
+  const { beer } = useContext(AppContext)
   const uid = user && user.uid;
+  const key = beer && beer.key;
 
   useEffect(()=>{
     async function loadList(){
 
       await firebase.database().ref('reserva')
       .child(uid)
+      .child(key)
       .limitToLast(10)
       .on('value', (snapshot)=>{
         setReservado([]);
 
         snapshot.forEach((childItem) => {
           let list = {
-            keyBeer: childItem.val().keyBeer,
             image: childItem.val().image,
             title: childItem.val().title,
             quant: childItem.val().quant,

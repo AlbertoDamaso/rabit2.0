@@ -1,14 +1,17 @@
 import React, { useContext } from 'react';
 
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { Feather, MaterialIcons } from '@expo/vector-icons';
+import { Feather, MaterialCommunityIcons } from '@expo/vector-icons';
 import { AuthContext } from '../contexts/auth';
 import { theme } from '../global/styles/theme';
 
 import { Home } from '../screens/Home';
+import { Opine } from '../screens/Opine';
 import { Order } from '../screens/Order';
 import { AddCam } from '../screens/AddCam';
+import { Control } from '../screens/Control';
 import { Profile } from '../screens/Profile';
+import { Register } from '../screens/Register';
 import { StartOrder } from '../screens/StartOrder';
 import { CustomDrawer } from '../components/CustomDrawer';
 
@@ -44,24 +47,41 @@ export function AppRoutes() {
         }
       }}
     >
-      <AppDrawer.Screen 
-        name="Home" 
-        component={Home}
-        options={{
-          drawerIcon: ({color}) => (
-            <Feather
-              name="file-text"
-              color={color}
-              size={24}
-            />
-          ),
-        }}
-      />   
+      {
+      user && user.useType == "Administrador" ?
+        <AppDrawer.Screen 
+          name="Home" 
+          component={Home}
+          options={{
+            drawerIcon: ({color}) => (
+              <Feather
+                name="file-text"
+                color={color}
+                size={24}
+              />
+            ),
+          }}
+        />
+      :
+        <AppDrawer.Screen 
+          name="Reservar" 
+          component={Home}
+          options={{
+            drawerIcon: ({color}) => (
+              <MaterialCommunityIcons 
+                name="cart-plus" 
+                color={color}
+                size={24} 
+              />
+            ),
+          }}
+        />
+      }   
       {
       user && user.useType == "Administrador" ?
         <AppDrawer.Screen 
           name="Beer" 
-          component={Order}
+          component={Register}
           options={{
             drawerIcon: ({color}) => (
               <Feather
@@ -74,30 +94,50 @@ export function AppRoutes() {
         />
       :
         <AppDrawer.Screen
-          name="Beer"
+          name="Reservados"
           component={Order}
           options={{
-            drawerLabel: () => null,
-            drawerItemStyle: {
-              height: 0,
-            }
+            drawerIcon: ({color}) => (
+              <MaterialCommunityIcons 
+                name="cart-outline" 
+                color={color} 
+                size={24} 
+              />
+            ),
           }}
         />  
       } 
- 
-      <AppDrawer.Screen 
-        name="Profile" 
-        component={Profile}
-        options={{
-          drawerIcon: ({color}) => (
-            <Feather
-              name="user"
-              color={color}
-              size={24}
-            />
-          ),
-        }}
-      />      
+      {
+      user && user.useType == "Administrador" ?
+        <AppDrawer.Screen 
+          name="Control" 
+          component={Control}
+          options={{
+            drawerIcon: ({color}) => (
+              <Feather
+                name="archive"
+                color={color}
+                size={24}
+              />
+            ),
+          }}
+        />      
+      :
+        <AppDrawer.Screen 
+          name="Perfil" 
+          component={Profile}
+          options={{
+            drawerIcon: ({color}) => (
+              <Feather
+                name="user"
+                color={color}
+                size={24}
+              />
+            ),
+          }}
+        />      
+      }
+      
       <AppDrawer.Screen 
         name="StartOrder"
         component={StartOrder}  
@@ -105,6 +145,13 @@ export function AppRoutes() {
           drawerLabel: () => null
         }}
       /> 
+      <AppDrawer.Screen 
+        name="Opinar"
+        component={Opine}  
+        options={{
+          drawerLabel: () => null
+        }}
+      />        
       <AppDrawer.Screen
           name="AddCam"
           component={AddCam}

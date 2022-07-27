@@ -1,127 +1,62 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import {
   View,
   Text,
-  Image,
-  Keyboard,
-  TextInput,
-  TouchableOpacity as TO,
 } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-
-import addPhoto from '../../assets/AddPhoto.png';
-import { AppContext } from '../../contexts/app';
+import firebase from '../../services/firebaseConnection';
 
 import { Background } from '../../components/Background';
-import { BtnGoBack } from '../../components/BtnGoBack';
-import { Input } from '../../components/Input';
-import { DescCerv } from '../../components/DescCerv';
-import { AreaSwitch } from '../../components/AreaSwitch';
-import { Button } from '../../components/Button';
+import { BtnDrawer } from '../../components/BtnDrawer';
+import { ListReserv } from '../../components/ListReserv';
+
 import { styles } from './styles';
-import { theme } from '../../global/styles/theme';
+import { AuthContext } from '../../contexts/auth';
 
-export function Order({route}) {
-  const navigation = useNavigation();
-  const [title, setTitle] = useState('');
-  const [desc, setDesc] = useState('');
-  const [valor, setValor] = useState('');
-  const [isAtiva, setIsAtiva] = useState(true);
-  const toggleSwitch = () => setIsAtiva(previousState => !previousState);
-  const image = route.params?.picture;
-  
-  const { addBeer } = useContext(AppContext);
+export function Order() {
+  const [reservado, setReservado] = useState([]);
 
-  function handleInclu() {
-    addBeer(image, title, desc, valor, isAtiva); 
-    Keyboard.dismiss();
-    setTitle('');
-    setDesc('');
-    setValor('');
-    setIsAtiva('');
-    navigation.navigate('Home');
-  }
+  const { user } = useContext(AuthContext);
+  const uid = user && user.uid;
 
-  function handleCamera(){
-    navigation.navigate('AddCam');
-  }
+  useEffect(()=>{
+    async function loadList(){
+
+      await firebase.database().ref('reserva')
+      .child(uid)
+      .limitToLast(10)
+      .on('value', (snapshot)=>{
+        setReservado([]);
+
+        snapshot.forEach((childItem) => {
+          let list = {
+            keyBeer: childItem.val().keyBeer,
+            image: childItem.val().image,
+            title: childItem.val().title,
+            quant: childItem.val().quant,
+          };
+          
+          setReservado(oldArray => [...oldArray, list].reverse());
+        })
+      })
+
+    }
+
+    loadList();
+  }, []);
 
   return (
     <Background>
         <View style={styles.container}>
-          <View style={styles.lineHeader}>
-            <BtnGoBack/>
+          <BtnDrawer/>
 
-            <Text style={styles.title}>
-              Cadastrar
-            </Text>
-          </View>
+          <Text style={styles.title}>
+              Reservados
+          </Text>
 
-          <View style={styles.formatImg}>
-            <TO
-              style={styles.imgBtn}
-              onPress={handleCamera}
-            >
-              { 
-                image != null && image != ''
-              ?   
-                <Image
-                  source={{uri:image}}
-                  style={styles.comImage}
-                  resizeMode="stretch"
-                />
-              :                          
-                <Image
-                  source={addPhoto}
-                />
-              }
-            </TO>            
-          </View>
-
-          <View style={styles.areaInclu}>
-            <Input
-              placeholder="Nome Cerveja"
-              returnKeyType="next"
-              onSubmitEditing={ () => Keyboard.dismiss()}
-              autoCorrect={false}
-              autoCapitalize="none"
-              value={title}
-              onChangeText={ (text) => setTitle(text) }
-            />
-
-            <DescCerv
-              placeholder={"Descrição da Cerveja"}
-              value={desc}
-              onChangeText={ (text) => setDesc(text) }
-            />
-
-            <View style={styles.arealine}>
-              <TextInput
-                style={styles.inputValor}
-                returnKeyType="next"
-                onSubmitEditing={ () => Keyboard.dismiss()}
-                autoCorrect={false}
-                autoCapitalize="none"
-                placeholderTextColor="#CCDE3F"
-                placeholder="Valor"
-                keyboardType='numeric'
-                value={valor}
-                onChangeText={ (text) => setValor(text) }              
-              />
-
-              <AreaSwitch
-                onValueChange={toggleSwitch}
-                thumbColor={isAtiva ? theme.colors.light : theme.colors.secundary}
-                value={isAtiva}
-              />
-            </View>
-
-            <Button
-              onPress={(handleInclu)}
-              title={"Cadastrar Cerveja"}
-              activeOpacity={0.7}
-            />
-          </View>
+          <ListReserv
+            data={reservado}
+            showsVerticalScrollIndicator={false}
+          />
         </View>
     </Background>  
   );

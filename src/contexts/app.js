@@ -1,5 +1,6 @@
-import React, { useState, createContext, useEffect } from 'react';
+import React, { useState, createContext, useContext, useEffect } from 'react';
 import firebase from '../services/firebaseConnection';
+import { AuthContext } from './auth';
 
 export const AppContext = createContext({})
 
@@ -7,6 +8,9 @@ function AppProvider({ children }){
   const [stockA, setStockA] = useState([]);
   const [stockI, setStockI] = useState([]);
   const [beer, setBeer] = useState(null);
+  const [quantr, setQuantr] = useState(null);
+  const [keycerv, setKeycerv] = useState('');
+  const { user } = useContext(AuthContext);   
 
     //Cria beer//Arrumar para pós cadastro zerar campos
     async function addBeer(image, title, desc, valor, isAtiva) {
@@ -87,12 +91,38 @@ function AppProvider({ children }){
   async function removBeer(data){
     await firebase.database().ref('beer').child(data.key).remove()
   } 
+ 
 
-    return(
-      <AppContext.Provider value={{ beer, stockA, stockI, addBeer, removBeer }}>
-        {children}
-      </AppContext.Provider>
-    );
+  //Criete/update Tabela de Reservas/REFAZER O COD PARA QUE FUNCIONE
+  async function resv(quant, obs, title, image, keyBeer) {
+    const uid = user.uid;
+    const bid = keyBeer;
+    //Cria uma reserva nova 
+    let key =  firebase.database().ref('reserva').child(uid).child(bid).push().key;
+    firebase.database().ref('reserva').child(uid).child(bid).child(key).set({
+      image: image,
+      title: title,
+      quant:quant,
+      obs:obs,
+    })   
+  }
+  
+  //Criete Tabela Opine
+  async function opine(nameBeer, opinion, quantStar){
+    const uid = user.uid;
+    let key = await(await firebase.database().ref('opine').child(uid).push()).key;
+    await firebase.database().ref('opine').child(uid).child(key).set({
+      nameBeer: nameBeer,
+      opinion: opinion,
+      quantStar: quantStar,
+    })
+  }
+
+  return(
+    <AppContext.Provider value={{ beer, stockA, stockI, addBeer, removBeer, resv, opine }}>
+      {children}
+    </AppContext.Provider>
+  );
 }
 
 export default AppProvider;

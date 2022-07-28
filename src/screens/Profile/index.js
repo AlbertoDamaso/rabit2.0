@@ -35,15 +35,22 @@ export function Profile() {
           <Text style={styles.nameProfile}>
             {user && user.name}  
           </Text>   
-          {/*<Text style={styles.revProfile}>
+          <Text style={styles.revProfile}>
             reservas
           </Text>
            <Text style={[styles.revProfile,{marginTop: 7}]}>
             retiradas
-          </Text> */}
+          </Text>
         </View>
 
         <View>
+          <View style={styles.formatBtn}>
+            <Button
+              title={'Reservar mais'}
+              activeOpacity={0.7}
+              onPress={(handleHome)}
+            />  
+          </View>
 
           <View style={styles.formatBtn}>
             <Button

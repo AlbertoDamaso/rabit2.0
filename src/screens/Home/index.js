@@ -36,7 +36,7 @@ export function Home() {
           </View>
 
           <View>
-            <AreaEmp title={"Rabit - Evento Junino dia 25/06"}/>
+            <AreaEmp title={"Rabit - Cervejas Artesanais"}/>
           </View>
 
           <View>

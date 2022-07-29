@@ -8,14 +8,14 @@ export const styles = StyleSheet.create({
     },
     container:{
         flex: 1,
-        marginTop: 100
+        justifyContent: 'center',
     },
-    bar: {
-        width: 39,
-        height: 2,
-        borderRadius: 2,
-        backgroundColor: theme.colors.secondary30,
-        alignSelf: 'center',
-        marginTop: 13,
+
+    modal: {
+        width: '84%',
+        height: 200,
+        borderRadius: 45,
+        alignSelf:'center',  
+        backgroundColor: theme.colors.secundary,
     }
 })

@@ -46,5 +46,38 @@ export const styles = StyleSheet.create({
     borderRadius: 25,
     borderColor: theme.colors.primaryMais,
     backgroundColor: theme.colors.primaryMais,
-  }
+  },
+  titleOut: {
+    marginTop: 52,
+    alignSelf: 'center',
+    fontSize: 19,
+    fontFamily: theme.fonts.title,
+    color: theme.colors.light,
+  },
+  linebtnOut:{
+    marginTop: 42,
+    justifyContent: 'center',    
+    flexDirection: 'row'
+  },
+  titleConcact: {
+    width: '80%',
+    textAlign: 'center',
+    marginTop: 5,
+    marginBottom: 5,
+    alignSelf: 'center',
+    fontSize: 19,
+    fontFamily: theme.fonts.title,
+    color: theme.colors.light,
+  },
+  textContact: {
+    marginBottom: 5,
+    marginRight: 5,
+    alignSelf: 'center',    
+    fontSize: 16,
+    color: theme.colors.light,
+  },
+  lineContact: {
+    flexDirection: 'row',
+    alignSelf: 'center', 
+  },
 });

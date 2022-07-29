@@ -15,6 +15,8 @@ export const theme = {
 
         success: '#00FF29',
         danger: '#FF0D0D',
+
+        overlay: 'rgba(0,0,0,0.7)',
     },
 
     fonts: {

@@ -1,10 +1,12 @@
 import React, { useContext, useState } from 'react';
 import {
   View,
-  Text
+  Text,
+  TouchableOpacity as TO,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Feather } from '@expo/vector-icons';
+import * as Clipboard from 'expo-clipboard';
 
 import { Background } from '../../components/Background';
 import { BtnDrawer } from '../../components/BtnDrawer';
@@ -22,6 +24,20 @@ export function Profile() {
   const { user, signOut } = useContext(AuthContext);
   const [ openModalOut, setOpenModalOut ] = useState(false);
   const [ openModalContact, setOpenModalContact ] = useState(false);
+
+  const [copiedText, setCopiedText] = useState('');
+  
+
+  function handleCoiedText1(){
+    Clipboard.setString('62999382217');
+  } 
+  function handleCoiedText2(){
+    Clipboard.setString('62996527542');
+  } 
+  function handleCoiedText3(){
+    Clipboard.setString('62999764644');
+  } 
+
 
   function handleHome(){
     navigation.navigate('Reservar');
@@ -77,7 +93,7 @@ export function Profile() {
 
           <View style={styles.formatBtn}>
             <Button
-              title={'Retirar/Contacto'}
+              title={'Retirar/Contatos'}
               activeOpacity={0.7}
               onPress={(handleOpenModalContact)}
             />  
@@ -99,31 +115,43 @@ export function Profile() {
             <Text style={styles.textContact}>
               Anderson - (62) 99938-2217
             </Text>
-            <Feather
-              name="copy"
-              color={theme.colors.secundaryMais}
-              size={24}
-            />
+            <TO
+              onPress={(handleCoiedText1)}
+            >
+              <Feather
+                name="copy"
+                color={theme.colors.secundaryMais}
+                size={24}
+              />
+            </TO>
           </View>
           <View style={styles.lineContact}>
             <Text style={styles.textContact}>
-              Carmen - (62) 99652-7542 
+              Carmen - (62) 99652-7542  
             </Text>
-            <Feather
-              name="copy"
-              color={theme.colors.secundaryMais}
-              size={24}
-            />            
+            <TO
+              onPress={(handleCoiedText2)}
+            >
+              <Feather
+                name="copy"
+                color={theme.colors.secundaryMais}
+                size={24}
+              /> 
+            </TO>           
           </View>
           <View style={styles.lineContact}>
             <Text style={styles.textContact}>
               Danns - (62) 99976-4644
             </Text>
+            <TO
+              onPress={(handleCoiedText3)}
+            >
             <Feather
               name="copy"
               color={theme.colors.secundaryMais}
               size={24}
-            />            
+            />   
+            </TO>         
           </View>
           <Button
             title={'Voltar'}

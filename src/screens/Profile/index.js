@@ -25,8 +25,6 @@ export function Profile() {
   const [ openModalOut, setOpenModalOut ] = useState(false);
   const [ openModalContact, setOpenModalContact ] = useState(false);
 
-  const [copiedText, setCopiedText] = useState('');
-  
 
   function handleCoiedText1(){
     Clipboard.setString('62999382217');

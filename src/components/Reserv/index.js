@@ -11,7 +11,6 @@ import { Feather } from '@expo/vector-icons';
 import { Button } from '../../components/Button'
 import { styles } from './styles';
 import { theme } from '../../global/styles/theme';
-import img from '../../assets/ImgBgOfe-3.png';
 
 export function Reserv({ data }){
   const navigation = useNavigation();
@@ -48,9 +47,9 @@ export function Reserv({ data }){
                 <Text style={styles.text}>
                     {data.quant} reservas
                 </Text>
-                <Text style={styles.text}>
+                {/* <Text style={styles.text}>
                     {data.quantRetir} retiradas
-                </Text>
+                </Text> */}
             </View>  
 
             <Button

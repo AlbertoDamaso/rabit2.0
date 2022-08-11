@@ -7,10 +7,11 @@ export const AppContext = createContext({})
 function AppProvider({ children }){
   const [stockA, setStockA] = useState([]);
   const [stockI, setStockI] = useState([]);
+  const [reservado, setReservado] = useState(null);
+  const [reservList, setReservList] = useState(null);
   const [beer, setBeer] = useState(null);
-  const [quantr, setQuantr] = useState(null);
-  const [keycerv, setKeycerv] = useState('');
   const { user } = useContext(AuthContext);   
+  const uid = user && user.uid;
 
     //Cria beer//Arrumar para pós cadastro zerar campos
     async function addBeer(image, title, desc, valor, isAtiva) {
@@ -29,7 +30,7 @@ function AppProvider({ children }){
           valor:valor,
           ativa:isAtiva,
         };
-        setBeer(data);//para manipular dados da cerveja.
+        setBeer(data);
       });
     }
 
@@ -91,13 +92,11 @@ function AppProvider({ children }){
   async function removBeer(data){
     await firebase.database().ref('beer').child(data.key).remove()
   } 
- 
 
   //Criete/update Tabela de Reservas/REFAZER O COD PARA QUE FUNCIONE
   async function resv(quant, obs, title, image, keyBeer) {
-    const uid = user.uid;
     const bid = keyBeer;
-    console.log(bid);
+
     //Cria uma reserva nova 
     let key =  firebase.database().ref('reserva').child(uid).child(bid).push().key;
     firebase.database().ref('reserva').child(uid).child(bid).child(key).set({
@@ -105,9 +104,42 @@ function AppProvider({ children }){
       title: title,
       quant:quant,
       obs:obs,
-    })   
+    }).then(()=>{
+      let data = {
+        key: key,
+        image: image,
+        obs: obs,
+        title: title,
+        quant: quant,
+      };
+      setReservado(data);
+    })
+    .catch((error) => {
+      alert(error.code);
+  })
+
   }
-  
+
+  //Lista Reservas
+  useEffect(()=>{
+    async function loadResv(){
+        setReservList([]);
+
+        forEach((reserva) => {
+          let list = {
+            key: reserva.val().key,
+            image: reserva.val().image,
+            obs: reserva.val().obs,
+            title: reserva.val().title,
+            quant: reserva.val().quant,
+          };
+          
+          setReservList(oldArray => [...oldArray, list].reverse());
+        })
+    }
+    loadResv();
+  },[]);  
+
   //Criete Tabela Opine
   async function opine(nameBeer, opinion, quantStar){
     const uid = user.uid;
@@ -120,7 +152,7 @@ function AppProvider({ children }){
   }
 
   return(
-    <AppContext.Provider value={{ beer, stockA, stockI, addBeer, removBeer, resv, opine }}>
+    <AppContext.Provider value={{ beer, stockA, stockI, reservado, reservList, addBeer, removBeer, resv, opine }}>
       {children}
     </AppContext.Provider>
   );

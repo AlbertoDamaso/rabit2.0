@@ -43,7 +43,6 @@ export function StartOrder(data) {
     let keyBeer = data.route.params.key;
     let title = data.route.params.title;
     let image = data.route.params.image;
-    console.log(keyBeer)
     resv(count, obs, title, image,keyBeer);
 
     setCount(1);
